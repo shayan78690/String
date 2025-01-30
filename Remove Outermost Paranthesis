@@ -1,0 +1,26 @@
+public class RemoveOutermostParentheses {
+    public static String removeOuterParentheses(String s) {
+        StringBuilder result = new StringBuilder();
+        int openCount = 0;
+
+        for (char c : s.toCharArray()) {
+            if (c == '(') {
+                if (openCount > 0) {  // Exclude outermost '('
+                    result.append(c);
+                }
+                openCount++;
+            } else {
+                openCount--;
+                if (openCount > 0) {  // Exclude outermost ')'
+                    result.append(c);
+                }
+            }
+        }
+        return result.toString();
+    }
+
+    public static void main(String[] args) {
+        String input = "(()())(())";
+        System.out.println(removeOuterParentheses(input));  // Output: "()()()"
+    }
+}
