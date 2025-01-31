@@ -1,16 +1,16 @@
 class Solution {
     public String reversePrefix(String word, char ch) {
         Stack<Character> stack = new Stack<>();
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for(int i = 0; i < word.length(); i++) {
             char current = word.charAt(i);
             stack.push(current);
             if(current == ch) {
                 while(!stack.isEmpty()) {
-                    result += stack.pop();
+                    result.append(stack.pop());
                 }
-            result += word.substring(i+1, word.length());
-            return result;
+            result.append(word.substring(i+1, word.length()));
+            return result.toString();
             }
 
         }
