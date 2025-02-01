@@ -1,0 +1,27 @@
+class Solution {
+    public String[] findRelativeRanks(int[] score) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for(int i = 0; i < score.length; i++) {
+            map.put(score[i], i);
+        }
+        Integer[] sortedScores = Arrays.stream(score).boxed().toArray(Integer[]::new);
+        Arrays.sort(sortedScores, Collections.reverseOrder());
+
+        String ans[] = new String[score.length];
+        for(int i = 0; i < score.length; i++) {
+            int current = sortedScores[i];
+            int original_index = map.get(current);
+            if(i == 0) {
+                ans[original_index] = "Gold Medal";
+            } 
+            else if(i == 1) {
+                ans[original_index] = "Silver Medal";
+            } else if(i == 2) {
+                ans[original_index] = "Bronze Medal";
+            } else {
+                ans[original_index] = String.valueOf(i + 1);;
+            }
+        }
+        return ans;
+    }
+}
