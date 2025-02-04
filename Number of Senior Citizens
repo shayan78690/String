@@ -1,0 +1,13 @@
+class Solution {
+    public int countSeniors(String[] details) {
+        int count = 0;
+        for(String  detail : details) {
+            String age = detail.substring(12, 14);
+            int age_val = Integer.parseInt(age);
+            if(age_val > 60) {
+                count++;
+            }
+        }
+        return count;
+    }
+}
