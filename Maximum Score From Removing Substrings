@@ -1,0 +1,37 @@
+class Solution {
+    String str;
+
+       public int removeSubstring(String pair, int score) {
+        int total_score = 0;
+        Stack<Character> stack = new Stack<>();
+        char firstChar = pair.charAt(0);
+        char secondChar = pair.charAt(1);
+
+        for(char ch : str.toCharArray()) {
+            if(ch == secondChar && !stack.isEmpty() && stack.peek() == firstChar) {
+                total_score += score;
+                stack.pop();
+            } else {
+                stack.push(ch);
+            }
+        }
+
+        StringBuilder sb = new StringBuilder();
+        while(!stack.isEmpty()) {
+            sb.insert(0, stack.pop());
+        }
+        str = sb.toString();
+        return total_score;
+    }
+    public int maximumGain(String s, int x, int y) {
+    str = s;
+    String firstPair = (x > y)? "ab" : "ba";
+    String secondPair = (firstPair.equals("ab"))? "ba" : "ab";
+
+    int score = 0;
+    score = removeSubstring(firstPair, Math.max(x, y));
+    score += removeSubstring(secondPair, Math.min(x, y));
+
+    return score;        
+    }
+}
