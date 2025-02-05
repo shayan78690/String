@@ -35,11 +35,10 @@ class Solution {
             num = num * current_den + current_num * den;
             den = den * current_den;
 
-            int gcd = find_GCD(Math.abs(num), Math.abs(den));
-            num = num / gcd;
-            den = den / gcd;
         }
-
+        int gcd = find_GCD(Math.abs(num), Math.abs(den));
+        num = num / gcd;
+        den = den / gcd;
         return num + "/" + den;
     }
 
