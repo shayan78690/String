@@ -1,0 +1,56 @@
+class Solution {
+    public String fractionAddition(String expression) {
+        int num = 0;
+        int den = 1;
+        int i = 0;
+        int n = expression.length();
+        while (i < n) {
+            int current_num = 0;
+            int current_den = 0;
+            boolean isNegative = false;
+            char ch = expression.charAt(i);
+            if (ch == '+' || ch == '-') {
+                if (ch == '-') {
+                    isNegative = true;
+                }
+                i++;
+            }
+
+            int start = i;
+            while (i < n && Character.isDigit(expression.charAt(i))) {
+                i++;
+            }
+            current_num = Integer.parseInt(expression.substring(start, i));
+            if (isNegative) {
+                current_num *= -1;
+            }
+            i++;
+
+            start = i;
+            while (i < n && Character.isDigit(expression.charAt(i))) {
+                i++;
+            }
+            current_den = Integer.parseInt(expression.substring(start, i));
+
+            num = num * current_den + current_num * den;
+            den = den * current_den;
+
+            int gcd = find_GCD(Math.abs(num), Math.abs(den));
+            num = num / gcd;
+            den = den / gcd;
+        }
+
+        return num + "/" + den;
+    }
+
+    public int find_GCD(int a, int b) {
+        while (a > 0 && b > 0) {
+            if (a > b) {
+                a = a % b;
+            } else {
+                b = b % a;
+            }
+        }
+        return a == 0 ? b : a;
+    }
+}
