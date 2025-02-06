@@ -1,0 +1,44 @@
+class Solution {
+    public String nearestPalindromic(String n) {
+        ArrayList<Long> list = new ArrayList<>();
+        int len = n.length();
+        boolean isOdd = (len % 2 != 0);
+        int mid = (len % 2 == 0) ? len / 2 : len / 2 + 1;
+        Long firsthalf = Long.parseLong(n.substring(0, mid));
+
+        list.add(findNearestPalindrome(firsthalf, isOdd));
+        list.add(findNearestPalindrome(firsthalf+1, isOdd));
+        list.add(findNearestPalindrome(firsthalf-1, isOdd));
+        list.add((long)Math.pow(10, len-1)-1);
+        list.add((long)Math.pow(10, len)+1);
+
+        long num = Long.parseLong(n);
+        long mindiff = Long.MAX_VALUE;
+        long res = Long.MAX_VALUE;
+        
+        for(Long element : list) {
+            if(element == num) {
+                continue;
+            }
+            long currentdiff = Math.abs(element - num);
+            if(currentdiff < mindiff) {
+                res = element;
+                mindiff = currentdiff;
+            } else if(currentdiff == mindiff) {
+                res = Math.min(res, element);
+            }
+        }
+        return String.valueOf(res);
+    }
+    public long findNearestPalindrome(long firsthalf, boolean isOdd) {
+        long res = firsthalf;
+        if(isOdd) {
+            firsthalf /= 10;
+        }
+        while(firsthalf > 0) {
+            res = res * 10 + (firsthalf % 10);
+            firsthalf /= 10;
+        }
+        return res;
+    }
+}
