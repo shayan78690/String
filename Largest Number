@@ -18,10 +18,10 @@ class Solution {
             return "0";
         }
 
-        String res = "";
+        StringBuilder res = new StringBuilder();
         for(String val : element) {
-            res += val;
+            res.append(val);
         }
-        return res;
+        return res.toString();
     }
 }
