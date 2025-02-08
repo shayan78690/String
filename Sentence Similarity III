@@ -1,0 +1,24 @@
+class Solution {
+    public boolean areSentencesSimilar(String sentence1, String sentence2) {
+        if(sentence1.length() > sentence2.length()) {
+            return areSentencesSimilar(sentence2, sentence1);
+        }
+
+        String smaller_words[] = sentence1.split(" ");
+        String larger_words[] = sentence2.split(" ");
+
+        int start = 0;
+        int end1 = smaller_words.length-1;
+        int end2 = larger_words.length-1;
+
+        while(start <= end1 && smaller_words[start].equals(larger_words[start])) {
+            start++;
+        }
+
+        while(start <= end1 && smaller_words[end1].equals(larger_words[end2])) {
+            end1--;
+            end2--;
+        }
+        return (start > end1);
+    }
+}
