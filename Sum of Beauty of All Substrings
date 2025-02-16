@@ -1,0 +1,29 @@
+class Solution {
+    public int beautySum(String s) {
+        int n = s.length();
+        int total_beauty = 0;
+        for(int i = 0; i < n; i++) {
+            for(int j = i; j < n; j++) {
+                String substring = s.substring(i, j+1);
+
+                int freq[] = new int[26];
+                for(int k = 0; k < substring.length(); k++) {
+                    freq[substring.charAt(k) - 'a']++;
+                }
+
+                int max_freq = 0;
+                int min_freq = Integer.MAX_VALUE;
+
+                for(int count : freq) {
+                    if(count > 0) {
+                        max_freq = Math.max(max_freq, count);
+                        min_freq = Math.min(min_freq, count);
+                    }
+                }
+
+                total_beauty += (max_freq - min_freq);
+            }
+        }
+        return total_beauty;
+    }
+}
