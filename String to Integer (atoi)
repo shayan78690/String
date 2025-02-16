@@ -8,7 +8,7 @@ class Solution {
             i++;
         }
 
-        if (s.charAt(i) == '+' || s.charAt(i) == '-') {
+        if (i < s.length() && (s.charAt(i) == '+' || s.charAt(i) == '-')) {
             sign = (s.charAt(i) == '-') ? -1 : 1;
             i++;
         }
