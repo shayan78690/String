@@ -1,0 +1,40 @@
+class Solution {
+    class Element implements Comparable<Element> {
+        char ch;
+        int freq;
+
+        public Element(char ch, int freq) {
+            this.ch = ch;
+            this.freq = freq;
+        }
+
+        public int compareTo(Element that) {
+            return that.freq - this.freq;
+        }
+    }
+    public String frequencySort(String s) {
+        HashMap<Character, Integer> map = new HashMap<>();
+        int n = s.length();
+        for(int i = 0; i < n; i++) {
+            char ch = s.charAt(i);
+            map.put(ch, map.getOrDefault(ch, 0)+1);
+        }
+
+        PriorityQueue<Element> pq = new PriorityQueue<>();
+        for(Character key : map.keySet()) {
+            Element element = new Element(key, map.get(key));
+            pq.offer(element);
+        }
+
+        StringBuilder sb = new StringBuilder();
+        while(pq.size() > 0) {
+            Element element = pq.poll();
+            while(element.freq > 0) {
+                sb.append(element.ch);
+                element.freq--;
+            }
+        }
+        return sb.toString();
+    }
+
+}
