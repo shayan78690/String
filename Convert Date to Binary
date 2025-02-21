@@ -1,3 +1,18 @@
+class Solution {
+    public String convertDateToBinary(String date) {
+        String parts[] = date.split("-");
+
+        // Correct parsing order
+        int year = Integer.parseInt(parts[0]);
+        int month = Integer.parseInt(parts[1]);
+        int day = Integer.parseInt(parts[2]);
+
+        // Use built-in method for correctness
+        return Integer.toBinaryString(year) + "-" +
+               Integer.toBinaryString(month) + "-" +
+               Integer.toBinaryString(day);
+    }
+}
 
 
 
